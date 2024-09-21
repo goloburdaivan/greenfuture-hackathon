@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
+import Header from "@/Components/Header/Header.jsx";
+import RegistrationForm from "@/Components/RegistrationForm/RegistrationForm.jsx";
 
-export default function Register() {
+const Registration = () => {
     return (
-        <div>
-            <h1>Register page</h1>
-        </div>
+        <>
+            <Header/>
+            <RegistrationForm/>
+        </>
     );
-}
+};
+
+export default Registration;

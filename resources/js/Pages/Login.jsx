@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
+import Header from "@/Components/Header/Header.jsx";
+import LoginForm from "@/Components/LoginForm/LoginForm.jsx";
 
-export default function Login() {
+const Login = () => {
+
     return (
-        <div>
-            <h1>Login page</h1>
-        </div>
+        <>
+            <Header/>
+            <LoginForm/>
+        </>
     );
-}
+};
+
+export default Login;
