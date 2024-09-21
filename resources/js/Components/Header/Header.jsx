@@ -16,9 +16,9 @@ function Header() {
                 </a>
 
                 <nav className="hidden sm:flex space-x-6">
-                    <a href="#" className="text-lg hover:text-gray-300">Home</a>
-                    <a href="#" className="text-lg hover:text-gray-300">Shop</a>
-                    <a href="/faq" className="text-lg hover:text-gray-300">FAQ</a>
+                    <a href="#" className="hover:text-gray-300">Home</a>
+                    <a href="/shop" className="hover:text-gray-300">Shop</a>
+                    <a href="/faq" className="hover:text-gray-300">Contact</a>
                 </nav>
 
                 <div className="hidden sm:flex space-x-4">
