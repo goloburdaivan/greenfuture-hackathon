@@ -8,7 +8,6 @@ export default function School({ school }) {
         <div>
             <h1 className="text-2xl font-bold mb-6">{school.name}</h1>
 
-            {/* Вкладки для поверхів */}
             <div className="flex space-x-4 mb-8">
                 {school.floors.map(floor => (
                     <button
@@ -25,7 +24,6 @@ export default function School({ school }) {
                 ))}
             </div>
 
-            {/* Відображення обраного поверху */}
             <div>
                 {school.floors
                     .filter(floor => floor.id === selectedFloor)
