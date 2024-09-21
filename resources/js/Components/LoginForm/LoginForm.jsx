@@ -1,14 +1,15 @@
 import React, { useState } from "react";
+import { useForm } from '@inertiajs/react';
 
 const Login = () => {
-    const [formData, setFormData] = useState({
+    const {data, setData, post, errors} = useForm({
         email: "",
         password: "",
     });
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData((prevData) => ({
+        setData((prevData) => ({
             ...prevData,
             [name]: value,
         }));
@@ -16,7 +17,7 @@ const Login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("Login data:", formData);
+        post('/login');
     };
 
     return (
@@ -35,11 +36,13 @@ const Login = () => {
                             type="email"
                             id="email"
                             name="email"
-                            value={formData.email}
+                            value={data.email}
+
                             onChange={handleChange}
                             required
                             className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500"
                         />
+                        {errors.email && <div>{errors.email}</div>}
                     </div>
 
                     <div className="mb-6">
@@ -53,13 +56,14 @@ const Login = () => {
                             type="password"
                             id="password"
                             name="password"
-                            value={formData.password}
+                            value={data.password}
                             onChange={handleChange}
                             required
                             className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500"
                         />
+                        {errors.password && <div>{errors.password}</div>}
                     </div>
-
+                    {errors.credentials && <div>{errors.credentials}</div>}
                     <button
                         type="submit"
                         className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
