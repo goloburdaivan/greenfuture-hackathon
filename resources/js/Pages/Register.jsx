@@ -1,15 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import Header from "@/Components/Header/Header.jsx";
 import RegistrationForm from "@/Components/RegistrationForm/RegistrationForm.jsx";
 import Footer from "@/Components/Footer/Footer.jsx";
 
 const Registration = () => {
     return (
-        <>
-            <Header/>
-            <RegistrationForm/>
-            <Footer/>
-        </>
+        <div className="flex flex-col min-h-screen">
+            <Header />
+
+            <div className="flex-grow flex justify-center items-center bg-gray-200">
+                <RegistrationForm />
+            </div>
+
+            <Footer />
+        </div>
     );
 };
 

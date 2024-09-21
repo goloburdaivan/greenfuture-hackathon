@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
+import {usePage} from "@inertiajs/react";
 
 function Header() {
+    const {props} = usePage();
     const [showMenu, setShowMenu] = useState(false);
 
     return (
@@ -21,10 +23,10 @@ function Header() {
                     <a href="/faq" className="hover:text-gray-300">FAQ</a>
                 </nav>
 
-                <div className="hidden sm:flex space-x-4">
+                {!props.auth ? <div className="hidden sm:flex space-x-4">
                     <a href="/login" className="text-lg hover:text-gray-300">Увійти</a>
                     <a href="/register" className="text-lg hover:text-gray-300">Зареєструватися</a>
-                </div>
+                </div> : null}
 
                 <div
                     className="sm:hidden cursor-pointer flex flex-col justify-center items-center space-y-1 w-8 h-8 ml-auto"

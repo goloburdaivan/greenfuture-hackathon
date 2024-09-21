@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import {useForm} from "@inertiajs/react";
+import React from "react";
+import { useForm } from '@inertiajs/react';
 
 const RegistrationForm = () => {
     const {data, setData, post, errors} = useForm({
@@ -23,8 +23,8 @@ const RegistrationForm = () => {
     };
 
     return (
-        <div className="flex justify-center items-center h-screen bg-gray-200 pt-0">
-            <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-sm mt-0">
+        <div className="flex justify-center items-center bg-gray-200 flex-grow">
+            <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-sm">
                 <h2 className="text-2xl font-bold mb-6 text-center">Реєстрація</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from '@inertiajs/react';
 
-const Login = () => {
+const LoginForm = () => {
     const {data, setData, post, errors} = useForm({
         email: "",
         password: "",
@@ -21,7 +21,7 @@ const Login = () => {
     };
 
     return (
-        <div className="flex justify-center items-center bg-gray-200 min-h-screen">
+        <div className="flex justify-center items-center bg-gray-200 flex-grow">
             <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-sm">
                 <h2 className="text-2xl font-bold mb-6 text-center">Вхід</h2>
                 <form onSubmit={handleSubmit}>
@@ -37,7 +37,6 @@ const Login = () => {
                             id="email"
                             name="email"
                             value={data.email}
-
                             onChange={handleChange}
                             required
                             className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500"
@@ -84,4 +83,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default LoginForm;
