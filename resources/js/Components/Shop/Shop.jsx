@@ -12,10 +12,7 @@ const products = [
 const Shop = () => {
     return (
         <div>
-            {/* Используем Header */}
-            <Header />
-
-            {/* Секція товарів */}
+            
             <Container>
                 <Typography variant="h4" gutterBottom style={{ marginTop: 20 }}>
                     Наші Товари
@@ -55,8 +52,6 @@ const Shop = () => {
                     ))}
                 </Grid>
             </Container>
-
-            <Footer/>
         </div>
     );
 };
