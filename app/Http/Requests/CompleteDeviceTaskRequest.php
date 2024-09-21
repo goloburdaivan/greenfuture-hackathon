@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\File;
 
-class CreateDeviceRequest extends FormRequest
+class CompleteDeviceTaskRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +23,11 @@ class CreateDeviceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['string', 'required'],
-            'device_hash' => ['string', 'required'],
-            'max_consumption' => ['int', 'required'],
+            'image' => [
+                'required',
+                File::image()
+                ->max('10mb'),
+            ],
         ];
     }
 }

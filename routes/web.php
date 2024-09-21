@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DeviceTaskController;
 use App\Http\Controllers\FAQController;
 use App\Http\Controllers\FloorRoomController;
 use App\Http\Controllers\HomeController;
@@ -50,6 +51,12 @@ Route::controller(RoomDeviceController::class)->group(function() {
 
 Route::controller(ShopController::class)->group(function() {
     Route::get('/shop', 'index')->name('shop.index');
+});
+
+Route::controller(DeviceTaskController::class)->group(function() {
+    Route::post('/devices/{device}/task/complete', 'complete')
+        ->name('devices.task.complete')
+        ->middleware('auth');
 });
 
 Route::get('/faq', [FAQController::class, 'index'])->name('faq');

@@ -32,7 +32,12 @@ class DeviceConsumptionUpdated implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new PrivateChannel("school.$this->schoolId.updated-consumption"),
+            new Channel("school.$this->schoolId.updated-consumption"),
         ];
+    }
+
+    public function broadcastAs(): string
+    {
+        return 'device-consumption-updated';
     }
 }
