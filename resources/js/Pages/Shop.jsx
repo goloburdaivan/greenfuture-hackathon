@@ -1,9 +1,8 @@
-import React from "react";
+import React from 'react';
+import Shop from '../Components/Shop/Shop';
 
-export default function Shop() {
-    return (
-        <div>
-            <h1>Shop</h1>
-        </div>
-    );
-}
+const ShopPage = () => {
+    return <Shop />;
+};
+
+export default ShopPage;
