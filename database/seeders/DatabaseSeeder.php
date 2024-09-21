@@ -2,8 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\StoreItem;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,11 +12,25 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        StoreItem::create([
+            'title' => 'Чоколадка',
+            'description' => 'Вкусна чоколадка мілка',
+            'image_url' => 'https://pesto-italy.com.ua/image/cache/catalog/products/multiload/99595/shokolad-milka-z-polunitseyu-100g_1-700x700.jpg',
+            'price' => 50,
+        ]);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        StoreItem::create([
+            'title' => 'Смартфон',
+            'description' => 'Смартфон Poco C65 8/256Gb Black',
+            'image_url' => 'https://scdn.comfy.ua/89fc351a-22e7-41ee-8321-f8a9356ca351/https://cdn.comfy.ua/media/catalog/product/c/3/c3up_black_back_1_.jpg',
+            'price' => 899.99,
+        ]);
+
+        StoreItem::create([
+            'title' => 'Кепка',
+            'description' => 'Кепка Пес Патрон',
+            'image_url' => 'https://content.rozetka.com.ua/goods/images/big/359227432.png',
+            'price' => 1000,
         ]);
     }
 }

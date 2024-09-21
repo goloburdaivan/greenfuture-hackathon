@@ -3,11 +3,11 @@ import Shop from '../Components/Shop/Shop.jsx';
 import Header from "@/Components/Header/Header.jsx";
 import Footer from "@/Components/Footer/Footer.jsx";
 
-const ShopPage = () => {
+const ShopPage = ({ items }) => {
     return (
         <>
             <Header/>
-            <Shop/>
+            <Shop items={items}/>
             <Footer/>
         </>
     );
