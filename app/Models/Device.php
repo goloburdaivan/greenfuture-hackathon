@@ -14,6 +14,7 @@ class Device extends Model
         'name',
         'device_hash',
         'room_id',
+        'max_consumption',
     ];
 
     public function room(): BelongsTo

@@ -5,12 +5,14 @@ namespace App\Services;
 use App\Http\Requests\ConsumptionRequest;
 use App\Repository\DeviceConsumptionLogRepository;
 use App\Repository\DeviceRepository;
+use App\Repository\DeviceTaskRepository;
 
 class DeviceConsumptionService
 {
     public function __construct(
         private readonly DeviceConsumptionLogRepository $repository,
         private readonly DeviceRepository               $deviceRepository,
+        private readonly DeviceTaskRepository $deviceTaskRepository,
     )
     {
     }
@@ -18,16 +20,21 @@ class DeviceConsumptionService
     public function processConsumption(ConsumptionRequest $request): void
     {
         $data = $request->validated();
-        $deviceId = $this->deviceRepository
+        $device = $this->deviceRepository
             ->query()
             ->byHash($data['device_hash'])
-            ->first()
-            ->id;
+            ->first();
 
         $this->repository->create([
-            'device_id' => $deviceId,
+            'device_id' => $device->id,
             'consumption_value' => $data['consumption'],
         ]);
+
+        if ($data['consumption'] > $device->max_consumption) {
+            $this->deviceTaskRepository->create([
+                'device_id' => $device->id,
+            ]);
+        }
     }
 
 }
