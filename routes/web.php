@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoomDeviceController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\SchoolFloorController;
+use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(AuthController::class)->group(function() {
@@ -42,4 +43,8 @@ Route::controller(RoomDeviceController::class)->group(function() {
     Route::post('/rooms/{room}/devices', 'create')
         ->name('schools.devices.store')
         ->middleware('auth');
+});
+
+Route::controller(ShopController::class)->group(function() {
+    Route::get('/shop', 'index')->name('shop.index');
 });
