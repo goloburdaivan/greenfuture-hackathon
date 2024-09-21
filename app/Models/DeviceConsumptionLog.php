@@ -6,18 +6,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Device extends Model
+class DeviceConsumptionLog extends Model
 {
     use HasFactory;
 
+    protected $table = 'device_consumption_logs';
+
     protected $fillable = [
-        'name',
-        'device_hash',
-        'room_id',
+        'consumption_value',
+        'device_id',
     ];
 
-    public function room(): BelongsTo
+    public function device(): BelongsTo
     {
-        return $this->belongsTo(Room::class);
+        return $this->belongsTo(Device::class);
     }
 }

@@ -1,16 +1,16 @@
-import React from 'react';
-import Shop from '../Components/Shop/Shop.jsx';
+import React, { useState } from "react";
 import Header from "@/Components/Header/Header.jsx";
+import FAQ from "@/Components/FAQ/FAQ.jsx";
 import Footer from "@/Components/Footer/Footer.jsx";
 
-const ShopPage = () => {
+const FAQPage = () => {
     return (
         <>
             <Header/>
-            <Shop/>
+            <FAQ/>
             <Footer/>
         </>
     );
 };
 
-export default ShopPage;
+export default FAQPage;

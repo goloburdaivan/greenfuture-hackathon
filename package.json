@@ -7,13 +7,16 @@
     },
     "devDependencies": {
         "axios": "^1.7.4",
+        "laravel-echo": "^1.16.1",
         "laravel-vite-plugin": "^1.0",
+        "pusher-js": "^8.4.0-rc2",
         "vite": "^5.0"
     },
     "dependencies": {
         "@emotion/react": "^11.13.3",
         "@emotion/styled": "^11.13.0",
         "@inertiajs/react": "^1.2.0",
+        "@mui/material": "^6.1.1",
         "@mui/icons-material": "^6.1.1",
         "@mui/styled-engine": "^6.1.1",
         "autoprefixer": "^10.4.20",

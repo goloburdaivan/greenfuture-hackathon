@@ -1,17 +1,20 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FAQController;
 use App\Http\Controllers\FloorRoomController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoomDeviceController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\SchoolFloorController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\Webhook\ConsumptionWebhookAction;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(AuthController::class)->group(function() {
     Route::get('/login', 'indexLogin')->name('login.index');
-    Route::post('/login', 'login')->name('login')->withoutMiddleware(\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class);
+    Route::post('/login', 'login')->name('login')->withoutMiddleware(VerifyCsrfToken::class);
     Route::get('/register', 'indexRegister')->name('register.index');
     Route::post('/register', 'register')->name('register');
 });
@@ -48,3 +51,9 @@ Route::controller(RoomDeviceController::class)->group(function() {
 Route::controller(ShopController::class)->group(function() {
     Route::get('/shop', 'index')->name('shop.index');
 });
+
+Route::get('/faq', [FAQController::class, 'index'])->name('faq');
+
+Route::post('/api/consumption/webhook', ConsumptionWebhookAction::class)
+    ->withoutMiddleware(VerifyCsrfToken::class)
+    ->withoutMiddleware('auth');
