@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FAQController;
 use App\Http\Controllers\FloorRoomController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoomDeviceController;
@@ -48,3 +49,5 @@ Route::controller(RoomDeviceController::class)->group(function() {
 Route::controller(ShopController::class)->group(function() {
     Route::get('/shop', 'index')->name('shop.index');
 });
+
+Route::get('/faq', [FAQController::class, 'index'])->name('faq');
