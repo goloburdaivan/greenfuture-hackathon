@@ -1,10 +1,12 @@
-import React from "react";
+import React from 'react';
+import Header from "@/Components/Header/Header.jsx";
+import School from "@/Components/School/School.jsx";
 
 export default function Show({ school }) {
-    console.log(school);
     return (
-        <div>
-            <h1>School page</h1>
-        </div>
+        <>
+            <Header/>
+            <School school={school}/>
+        </>
     );
 }
