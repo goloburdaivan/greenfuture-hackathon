@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import Header from "@/Components/Header/Header.jsx";
-import RegistrationForm from "@/Components/RegistrationForm/RegistrationForm.jsx";
+import FAQ from "@/Components/FAQ/FAQ.jsx";
 import Footer from "@/Components/Footer/Footer.jsx";
 
-const Registration = () => {
+const FAQPage = () => {
     return (
         <>
             <Header/>
-            <RegistrationForm/>
+            <FAQ/>
             <Footer/>
         </>
     );
 };
 
-export default Registration;
+export default FAQPage;

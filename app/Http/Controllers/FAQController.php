@@ -10,6 +10,6 @@ class FAQController extends Controller
 {
     public function index(): Response
     {
-        return Inertia::render('FAQ');
+        return Inertia::render('FAQPage');
     }
 }
