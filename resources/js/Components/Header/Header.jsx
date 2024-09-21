@@ -15,15 +15,15 @@ function Header() {
                     RZHADPower
                 </a>
 
-                <nav className="hidden sm:flex space-x-6">
-                    <a href="#" className="hover:text-gray-300">Home</a>
-                    <a href="/shop" className="hover:text-gray-300">Shop</a>
-                    <a href="/faq" className="hover:text-gray-300">Contact</a>
+                <nav className="hidden text-lg sm:flex space-x-8">
+                    <a href="/" className="hover:text-gray-300">Головна</a>
+                    <a href="/shop" className="hover:text-gray-300">Магазин</a>
+                    <a href="/faq" className="hover:text-gray-300">FAQ</a>
                 </nav>
 
                 <div className="hidden sm:flex space-x-4">
-                    <a href="/login" className="text-lg hover:text-gray-300">Login</a>
-                    <a href="/register" className="text-lg hover:text-gray-300">Register</a>
+                    <a href="/login" className="text-lg hover:text-gray-300">Увійти</a>
+                    <a href="/register" className="text-lg hover:text-gray-300">Зареєструватися</a>
                 </div>
 
                 <div

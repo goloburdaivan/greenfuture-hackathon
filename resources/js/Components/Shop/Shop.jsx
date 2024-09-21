@@ -1,5 +1,4 @@
 import React from 'react';
-import { Typography, Button, Container, Grid, Card, CardMedia, CardContent, CardActions } from '@mui/material';
 
 const products = [
     { id: 1, name: 'Товар 1', description: 'Опис товару 1', price: 100, image: 'https://img.freepik.com/free-photo/funny-monkey-with-hat-studio_23-2150844087.jpg' },
@@ -9,47 +8,36 @@ const products = [
 
 const Shop = () => {
     return (
-        <div>
-
-            <Container>
-                <Typography variant="h4" gutterBottom style={{ marginTop: 20 }}>
-                    Наші Товари
-                </Typography>
-                <Grid container spacing={4}>
+        <div className="min-h-screen bg-gray-100 py-8">
+            <div className="container mx-auto px-4">
+                <h2 className="text-4xl font-bold text-center mb-10">Товари</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
                     {products.map((product) => (
-                        <Grid item key={product.id} xs={12} sm={6} md={4}>
-                            <Card>
-                                <CardMedia
-                                    component="img"
-                                    height="140"
-                                    image={product.image}
-                                    alt={product.name}
-                                />
-                                <CardContent>
-                                    <Typography variant="h5">{product.name}</Typography>
-                                    <Typography variant="body2" color="text.secondary">
-                                        {product.description}
-                                    </Typography>
-                                    <Typography variant="h6" color="primary" style={{
-                                        marginTop: 10,
-                                        backgroundImage: 'url(https://media.lordicon.com/icons/wired/lineal/290-coin.svg)',
-                                        backgroundSize: '1em',
-                                        backgroundRepeat: 'no-repeat',
-                                        paddingLeft: '1.5em',
-                                        paddingRight: '0.5em',}}>
-                                        {product.price}
-                                    </Typography>
-                                </CardContent>
-                                <CardActions>
-                                    <Button size="small" color="primary">
-                                        Додати в кошик
-                                    </Button>
-                                </CardActions>
-                            </Card>
-                        </Grid>
+                        <div key={product.id} className="bg-white rounded-lg shadow-lg overflow-hidden">
+                            <img
+                                src={product.image}
+                                alt={product.name}
+                                className="w-full h-48 object-cover"
+                            />
+                            <div className="p-6">
+                                <h3 className="text-xl font-semibold">{product.name}</h3>
+                                <p className="text-gray-600 mt-2">{product.description}</p>
+                                <p className="text-lg text-blue-500 mt-4 relative pl-6">
+                                    <span className="absolute left-0 top-0">
+                                        <img src="https://media.lordicon.com/icons/wired/lineal/290-coin.svg" alt="coin icon" className="w-6 h-6" />
+                                    </span>
+                                    {product.price}
+                                </p>
+                            </div>
+                            <div className="p-6 pt-0">
+                                <button className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md">
+                                    Купити
+                                </button>
+                            </div>
+                        </div>
                     ))}
-                </Grid>
-            </Container>
+                </div>
+            </div>
         </div>
     );
 };
