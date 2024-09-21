@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Models\School;
+use App\Repository\QueryBuilders\SchoolQueryBuilder;
+use Illuminate\Database\Eloquent\Collection;
 
 class SchoolRepository
 {
@@ -18,5 +20,10 @@ class SchoolRepository
         }
 
         return $school;
+    }
+
+    public function query(): SchoolQueryBuilder
+    {
+        return new SchoolQueryBuilder();
     }
 }
