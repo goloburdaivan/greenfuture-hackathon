@@ -1,18 +1,17 @@
 import React, { useState } from "react";
+import {useForm} from "@inertiajs/react";
 
 const RegistrationForm = () => {
-    const [formData, setFormData] = useState({
-        name: "", // Новое поле для имени
+    const {data, setData, post, errors} = useForm({
+        name: "",
         email: "",
         password: "",
-        confirmPassword: "",
+        password_confirmation: "",
     });
-
-    const [error, setError] = useState("");
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData((prevData) => ({
+        setData((prevData) => ({
             ...prevData,
             [name]: value,
         }));
@@ -20,14 +19,7 @@ const RegistrationForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        if (formData.password !== formData.confirmPassword) {
-            setError("Паролі не співпадають");
-            return;
-        }
-
-        setError("");
-        console.log("Submitted data:", formData);
+        post('/register');
     };
 
     return (
@@ -35,7 +27,6 @@ const RegistrationForm = () => {
             <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-sm mt-0">
                 <h2 className="text-2xl font-bold mb-6 text-center">Реєстрація</h2>
                 <form onSubmit={handleSubmit}>
-                    {/* Поле для ввода имени */}
                     <div className="mb-4">
                         <label htmlFor="name" className="block text-sm font-medium text-gray-700">
                             Ім'я
@@ -44,11 +35,12 @@ const RegistrationForm = () => {
                             type="text"
                             id="name"
                             name="name"
-                            value={formData.name}
+                            value={data.name}
                             onChange={handleChange}
                             required
                             className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500"
                         />
+                        {errors.name && <div>{errors.name}</div>}
                     </div>
 
                     <div className="mb-4">
@@ -59,7 +51,7 @@ const RegistrationForm = () => {
                             type="email"
                             id="email"
                             name="email"
-                            value={formData.email}
+                            value={data.email}
                             onChange={handleChange}
                             required
                             className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500"
@@ -74,32 +66,32 @@ const RegistrationForm = () => {
                             type="password"
                             id="password"
                             name="password"
-                            value={formData.password}
+                            value={data.password}
                             onChange={handleChange}
                             required
                             className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500"
                         />
+                        {errors.password && <div>{errors.password}</div>}
                     </div>
 
                     <div className="mb-6">
                         <label
-                            htmlFor="confirmPassword"
+                            htmlFor="password_confirmation"
                             className="block text-sm font-medium text-gray-700"
                         >
                             Підтвердіть пароль
                         </label>
                         <input
                             type="password"
-                            id="confirmPassword"
-                            name="confirmPassword"
-                            value={formData.confirmPassword}
+                            id="password_confirmation"
+                            name="password_confirmation"
+                            value={data.password_confirmation}
                             onChange={handleChange}
                             required
                             className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500"
                         />
+                        {errors.password_confirmation && <div>{errors.password_confirmation}</div>}
                     </div>
-
-                    {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
 
                     <button
                         type="submit"
