@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Repository\SchoolRepository;
+use App\Services\SchoolService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -10,13 +11,13 @@ use Inertia\Response;
 class HomeController extends Controller
 {
     public function __construct(
-        private readonly SchoolRepository $schoolRepository,
+        private readonly SchoolService $schoolService,
     ) {
     }
 
     public function index(Request $request): Response
     {
-        $schools = $this->schoolRepository->getSchoolsByUser($request->user()->id);
+        $schools = $this->schoolService->getSchoolByUser($request->user());
         return Inertia::render('Index', [
             'schools' => $schools,
         ]);

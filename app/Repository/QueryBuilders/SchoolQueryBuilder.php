@@ -21,6 +21,12 @@ class SchoolQueryBuilder
         return $this;
     }
 
+    public function byUserId(int $userId): self
+    {
+        $this->query->where('user_id', $userId);
+        return $this;
+    }
+
     public function loadRelations(array $relations): self
     {
         $this->query->with($relations);

@@ -6,6 +6,7 @@ use App\Http\Requests\CreateSchoolRequest;
 use App\Models\School;
 use App\Models\User;
 use App\Repository\SchoolRepository;
+use Illuminate\Database\Eloquent\Collection;
 
 class SchoolService
 {
@@ -19,6 +20,14 @@ class SchoolService
         return $this->repository->create($request->validated() + [
             'user_id' => $user->id,
         ]);
+    }
+
+    public function getSchoolByUser(User $user): Collection
+    {
+        return $this->repository
+            ->query()
+            ->byUserId($user->id)
+            ->get();
     }
 
     public function getSchoolData(int $schoolId): ?School
