@@ -27,13 +27,19 @@ Route::controller(SchoolController::class)->group(function() {
 });
 
 Route::controller(SchoolFloorController::class)->group(function() {
-    Route::post('/schools/{school}/floors', 'create')->name('schools.floors.store')->withoutMiddleware(\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class);
+    Route::post('/schools/{school}/floors', 'create')
+        ->name('schools.floors.store')
+        ->middleware('auth');
 });
 
 Route::controller(FloorRoomController::class)->group(function() {
-    Route::post('/floors/{floor}/rooms', 'create')->name('schools.rooms.store')->withoutMiddleware(\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class);;
+    Route::post('/floors/{floor}/rooms', 'create')
+        ->name('schools.rooms.store')
+        ->middleware('auth');
 });
 
 Route::controller(RoomDeviceController::class)->group(function() {
-    Route::post('/rooms/{room}/devices', 'create')->name('schools.devices.store')->withoutMiddleware(\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class);
+    Route::post('/rooms/{room}/devices', 'create')
+        ->name('schools.devices.store')
+        ->middleware('auth');
 });
