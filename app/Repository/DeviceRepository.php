@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Models\Device;
+use App\Repository\QueryBuilders\DeviceQueryBuilder;
 
 class DeviceRepository
 {
@@ -18,5 +19,10 @@ class DeviceRepository
         }
 
         return $device;
+    }
+
+    public function query(): DeviceQueryBuilder
+    {
+        return new DeviceQueryBuilder();
     }
 }
