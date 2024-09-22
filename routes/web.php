@@ -50,7 +50,12 @@ Route::controller(RoomDeviceController::class)->group(function() {
 });
 
 Route::controller(ShopController::class)->group(function() {
-    Route::get('/shop', 'index')->name('shop.index');
+    Route::get('/shop', 'index')
+        ->name('shop.index')
+        ->middleware('auth');
+    Route::post('/shop/{item}', 'buy')
+        ->name('shop.buy')
+        ->middleware('auth');
 });
 
 Route::controller(DeviceTaskController::class)->group(function() {
