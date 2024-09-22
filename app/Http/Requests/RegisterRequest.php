@@ -26,6 +26,7 @@ class RegisterRequest extends FormRequest
             'name' => ['string', 'required'],
             'email' => ['email', 'required'],
             'password' => ['required', 'confirmed', Password::min(8)->mixedCase()->numbers()->symbols()],
+            'telegram_id' => ['string', 'nullable'],
         ];
     }
 }

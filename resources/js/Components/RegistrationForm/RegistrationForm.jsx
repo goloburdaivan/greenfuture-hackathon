@@ -2,11 +2,12 @@ import React from "react";
 import { useForm } from '@inertiajs/react';
 
 const RegistrationForm = () => {
-    const {data, setData, post, errors} = useForm({
+    const { data, setData, post, errors } = useForm({
         name: "",
         email: "",
         password: "",
         password_confirmation: "",
+        telegram_id: "",
     });
 
     const handleChange = (e) => {
@@ -91,6 +92,21 @@ const RegistrationForm = () => {
                             className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500"
                         />
                         {errors.password_confirmation && <div>{errors.password_confirmation}</div>}
+                    </div>
+
+                    <div className="mb-4">
+                        <label htmlFor="telegram_id" className="block text-sm font-medium text-gray-700">
+                            Telegram ID (необов'язково)
+                        </label>
+                        <input
+                            type="text"
+                            id="telegram_id"
+                            name="telegram_id"
+                            value={data.telegram_id}
+                            onChange={handleChange}
+                            className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500"
+                        />
+                        {errors.telegram_id && <div>{errors.telegram_id}</div>}
                     </div>
 
                     <button
