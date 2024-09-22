@@ -39,6 +39,8 @@ class SchoolService
                 'floors',
                 'floors.rooms',
                 'floors.rooms.devices',
+                'floors.rooms.devices.lastConsumption',
+                'floors.rooms.devices.task',
             ])
             ->first();
     }
