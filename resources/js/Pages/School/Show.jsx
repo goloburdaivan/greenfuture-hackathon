@@ -9,7 +9,7 @@ export default function Show({ school }) {
         <div className="bg-gray-100 flex flex-col min-h-screen">
             <Header/>
                 <div className="flex-grow justify-center items-center">
-                    <WebSocketProvider>
+                    <WebSocketProvider school={school}>
                         <School school={school}/>
                     </WebSocketProvider>
                 </div>
