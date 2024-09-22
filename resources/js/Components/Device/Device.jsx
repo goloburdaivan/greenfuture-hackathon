@@ -91,7 +91,7 @@ function Device({ device }) {
             </div>
 
             <span className="text-center text-sm">{device.name}</span>
-            <span className="text-center text-sm">{device.last_consumption.consumption_value} Вт</span>
+            <span className="text-center text-sm">{device.last_consumption?.consumption_value ? device.last_consumption.consumption_value : 0} Вт</span>
 
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Upload Photo</DialogTitle>
