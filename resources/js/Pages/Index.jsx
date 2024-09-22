@@ -2,10 +2,22 @@ import React, { useState } from "react";
 import { Grid, Typography, Paper, Modal, TextField, Button, Box } from "@mui/material";
 import Header from "@/Components/Header/Header.jsx";
 import Footer from "@/Components/Footer/Footer.jsx";
+import {useForm} from "@inertiajs/react";
 
 export default function Index({ schools }) {
+    const {data, setData, post, errors} = useForm({
+        name: "",
+    });
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [newSchoolName, setNewSchoolName] = useState("");
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
+    };
 
     const handleOpenModal = () => {
         setIsModalOpen(true);
@@ -13,12 +25,23 @@ export default function Index({ schools }) {
 
     const handleCloseModal = () => {
         setIsModalOpen(false);
-        setNewSchoolName("");
+        setData({
+            name: "",
+        });
+        setIsSubmitting(false);
     };
 
     const handleCreateSchool = () => {
-        console.log("Створення нової школи:", newSchoolName);
-        handleCloseModal();
+        setIsSubmitting(true);
+        post('/schools', {
+            preserveScroll: true,
+            onSuccess: () => {
+                handleCloseModal();
+            },
+            onError: () => {
+                setIsSubmitting(false);
+            },
+        });
     };
 
     return (
@@ -99,21 +122,24 @@ export default function Index({ schools }) {
                     <TextField
                         label="Назва школи"
                         variant="outlined"
-                        value={newSchoolName}
-                        onChange={(e) => setNewSchoolName(e.target.value)}
+                        name="name"
+                        value={data.name}
+                        onChange={handleChange}
                         fullWidth
                     />
                     <Button
                         variant="contained"
                         color="primary"
                         onClick={handleCreateSchool}
+                        disabled={isSubmitting}
                     >
-                        Створити
+                        {isSubmitting ? "Створення..." : "Створити"}
                     </Button>
                     <Button
                         variant="outlined"
                         color="secondary"
                         onClick={handleCloseModal}
+                        disabled={isSubmitting}
                     >
                         Відмінити
                     </Button>

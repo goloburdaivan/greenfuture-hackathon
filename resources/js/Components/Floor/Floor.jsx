@@ -1,10 +1,21 @@
 import React, { useState } from 'react';
 import Room from '../Room/Room';
 import { Modal, TextField, Button, Box, Typography } from '@mui/material';
+import {useForm} from "@inertiajs/react";
 
 export default function Floor({ floor }) {
+    const {data, setData, post, processing, errors} = useForm({
+        room_number: 1,
+    });
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [newRoomCode, setNewRoomCode] = useState("");
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
+    };
 
     const handleOpenModal = () => {
         setIsModalOpen(true);
@@ -12,11 +23,21 @@ export default function Floor({ floor }) {
 
     const handleCloseModal = () => {
         setIsModalOpen(false);
-        setNewRoomCode("");
     };
 
     const handleAddRoom = () => {
-        handleCloseModal();
+        post(`/floors/${floor.id}/rooms`, {
+            preserveScroll: true,
+            onSuccess: () => {
+                setData({
+                    room_number: 1,
+                });
+                handleCloseModal();
+            },
+            onError: () => {
+                handleCloseModal()
+            }
+        });
     };
 
     return (
@@ -49,22 +70,24 @@ export default function Floor({ floor }) {
                         label="Номер кімнати"
                         type="number"
                         variant="outlined"
-                        value={newRoomCode}
-                        onChange={(e) => setNewRoomCode(e.target.value)}
+                        name="room_number"
+                        value={data.room_number}
+                        onChange={handleChange}
                         fullWidth
                     />
                     <Button
                         variant="contained"
                         color="primary"
                         onClick={handleAddRoom}
-                        disabled={!newRoomCode.trim()}
+                        disabled={processing}
                     >
-                        Додати
+                        {processing ? 'Створення...' : 'Створити'}
                     </Button>
                     <Button
                         variant="outlined"
                         color="secondary"
                         onClick={handleCloseModal}
+                        disabled={processing}
                     >
                         Відмінити
                     </Button>

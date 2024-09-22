@@ -1,12 +1,23 @@
 import React, { useState } from 'react';
 import Device from '../Device/Device';
 import { Modal, TextField, Button, Box, Typography } from '@mui/material';
+import {useForm} from "@inertiajs/react";
 
 export default function Room({ room }) {
+    const {data, setData, post, processing, errors} = useForm({
+        name: "",
+        device_hash: "",
+        max_consumption: 0,
+    });
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [newDeviceName, setNewDeviceName] = useState("");
-    const [deviceHash, setDeviceHash] = useState("");
-    const [maxConsumption, setMaxConsumption] = useState("");
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
+    };
 
     const handleOpenModal = () => {
         setIsModalOpen(true);
@@ -14,20 +25,28 @@ export default function Room({ room }) {
 
     const handleCloseModal = () => {
         setIsModalOpen(false);
-        setNewDeviceName("");
-        setDeviceHash("");
-        setMaxConsumption("");
     };
 
     const handleAddDevice = () => {
-        const consumptionValue = parseFloat(maxConsumption);
+        const consumptionValue = parseFloat(data.max_consumption);
         if (consumptionValue <= 0) {
             alert("Максимальне споживання повинно бути більше 0.");
             return;
         }
-
-        console.log(`Добавить устройство: ${newDeviceName}, hash: ${deviceHash}, max_consumption: ${consumptionValue} Вт в комнату: ${room.room_number}`);
-        handleCloseModal();
+        post(`/rooms/${room.id}/devices`, {
+            preserveScroll: true,
+            onSuccess: () => {
+                setData({
+                    name: "",
+                    device_hash: "",
+                    max_consumption: 0,
+                });
+                handleCloseModal();
+            },
+            onError: () => {
+                handleCloseModal()
+            }
+        });
     };
 
     return (
@@ -65,36 +84,41 @@ export default function Room({ room }) {
                     <TextField
                         label="Назва пристрою"
                         variant="outlined"
-                        value={newDeviceName}
-                        onChange={(e) => setNewDeviceName(e.target.value)}
+                        name="name"
+                        value={data.name}
+                        onChange={handleChange}
                         fullWidth
                     />
                     <TextField
                         label="Хеш пристрою"
                         variant="outlined"
-                        value={deviceHash}
-                        onChange={(e) => setDeviceHash(e.target.value)}
+                        name="device_hash"
+                        value={data.device_hash}
+                        onChange={handleChange}
                         fullWidth
                     />
                     <TextField
                         label="Максимальне споживання (Вт)"
                         variant="outlined"
                         type="number"
-                        value={maxConsumption}
-                        onChange={(e) => setMaxConsumption(e.target.value)}
+                        name="max_consumption"
+                        value={data.max_consumption}
+                        onChange={handleChange}
                         fullWidth
                     />
                     <Button
                         variant="contained"
                         color="primary"
                         onClick={handleAddDevice}
+                        disabled={processing}
                     >
-                        Додати
+                        {processing ? 'Створення...' : 'Додати'}
                     </Button>
                     <Button
                         variant="outlined"
                         color="secondary"
                         onClick={handleCloseModal}
+                        disabled={processing}
                     >
                         Відмінити
                     </Button>
