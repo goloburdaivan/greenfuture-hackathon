@@ -44,7 +44,7 @@ export default function Index({ schools }) {
                                         backgroundColor: '#f0f4f8',
                                         border: '1px solid #e0e0e0',
                                         color: '#333',
-                                        minHeight: '200px', // Фиксированная высота для всех блоков
+                                        minHeight: '200px',
                                         display: 'flex',
                                         justifyContent: 'center',
                                         alignItems: 'center',
@@ -65,7 +65,7 @@ export default function Index({ schools }) {
                                 backgroundColor: '#e0f7fa',
                                 border: '2px dashed #80deea',
                                 color: '#333',
-                                minHeight: '200px', // Фиксированная высота для всех блоков
+                                minHeight: '200px',
                                 display: 'flex',
                                 justifyContent: 'center',
                                 alignItems: 'center',
