@@ -9,19 +9,12 @@ export default function School({ school }) {
     const [isFloorModalOpen, setIsFloorModalOpen] = useState(false);
     const [newFloorNumber, setNewFloorNumber] = useState("");
 
-    const handleOpenModal = () => {
-        setIsModalOpen(true);
-    };
 
     const handleCloseModal = () => {
         setIsModalOpen(false);
         setNewRoomCode("");
     };
 
-    const handleAddRoom = () => {
-        console.log("Добавить новый класс:", newRoomCode);
-        handleCloseModal();
-    };
 
     const handleOpenFloorModal = () => {
         setIsFloorModalOpen(true);
@@ -33,12 +26,11 @@ export default function School({ school }) {
     };
 
     const handleAddFloor = () => {
-        console.log("Добавить новый этаж:", newFloorNumber);
         handleCloseFloorModal();
     };
 
     return (
-        <div className="bg-gray-100 min-h-screen p-8 flex">
+        <div className="bg-gray-100 p-8 flex">
             <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-lg p-8 flex-1 flex">
                 <div className="flex-1">
                     <h1 className="text-4xl font-bold mb-6 text-center text-gray-800">
@@ -55,25 +47,8 @@ export default function School({ school }) {
                             ))}
                     </div>
 
-                    <div className="flex justify-center mt-4">
-                        <Paper
-                            className="p-6 text-center shadow-md rounded-lg hover:shadow-xl transition-shadow duration-200 cursor-pointer"
-                            style={{
-                                backgroundColor: '#e0f7fa',
-                                border: '2px dashed #80deea',
-                                color: '#333',
-                                width: '33%',
-                            }}
-                            onClick={handleOpenModal}
-                        >
-                            <Typography variant="h4" className="text-gray-600">
-                                +
-                            </Typography>
-                        </Paper>
-                    </div>
                 </div>
 
-                {/* Переключатели этажей справа по середине */}
                 <div className="flex flex-col justify-center ml-4">
                     {school.floors.slice().reverse().map(floor => (
                         <button
@@ -89,7 +64,6 @@ export default function School({ school }) {
                         </button>
                     ))}
 
-                    {/* Кнопка для создания нового этажа */}
                     <Button
                         variant="contained"
                         color="primary"
