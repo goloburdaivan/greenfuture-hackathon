@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Events\DeviceConsumptionUpdated;
 use App\Http\Requests\ConsumptionRequest;
 use App\Repository\DeviceConsumptionLogRepository;
 use App\Repository\DeviceRepository;
@@ -25,7 +26,7 @@ class DeviceConsumptionService
             ->byHash($data['device_hash'])
             ->first();
 
-        $this->repository->create([
+        $log = $this->repository->create([
             'device_id' => $device->id,
             'consumption_value' => $data['consumption'],
         ]);
@@ -34,6 +35,16 @@ class DeviceConsumptionService
             $this->deviceTaskRepository->create([
                 'device_id' => $device->id,
             ]);
+
+            broadcast(new DeviceConsumptionUpdated(
+                $log->consumption_value,
+                $log->device_id,
+                $log->device
+                    ->room
+                    ->floor
+                    ->school
+                    ->id,
+            ));
         }
     }
 

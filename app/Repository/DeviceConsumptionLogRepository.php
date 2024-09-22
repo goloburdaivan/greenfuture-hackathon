@@ -26,16 +26,6 @@ class DeviceConsumptionLogRepository
             throw new \Exception("Failed to update consumption log");
         }
 
-        broadcast(new DeviceConsumptionUpdated(
-            $log->consumption_value,
-            $log->device_id,
-            $log->device
-            ->room
-            ->floor
-            ->school
-            ->id,
-        ));
-
         return $log;
     }
 }
